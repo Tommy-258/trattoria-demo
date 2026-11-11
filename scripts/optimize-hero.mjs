@@ -6,7 +6,7 @@
  *
  * Output (committed to the repo):
  *   public/images/hero/desktop-<width>.{avif,webp}   landscape crop (full frame)
- *   public/images/hero/mobile-<width>.{avif,webp}    portrait crop for phones
+ *   public/images/hero/mobile-<width>.{avif,webp}    close-up crop of the pizza for phones
  *   src/generated/hero-image.json                    widths per image + tiny blur placeholder
  *
  * The site is a static export, so Next's on-demand image optimizer isn't available.
@@ -30,20 +30,26 @@ const manifestPath = path.join(root, "src/generated/hero-image.json");
 /** Must match images.deviceSizes in next.config.ts */
 const DESKTOP_WIDTHS = [640, 828, 1080, 1280, 1920, 2560];
 const MOBILE_WIDTHS = [640, 828, 1080, 1280];
-/** Portrait crop for phones: width / height, centered on the pizza */
-const MOBILE_ASPECT = 3 / 5;
-const MOBILE_FOCUS_X = 0.53;
+/**
+ * Portrait-ish crop for phones, as fractions of the source frame: a close-up of the pizza with the
+ * flames in the top third and the dark oven floor at the bottom (it fades into the text area).
+ */
+const MOBILE_CROP = { left: 0.315, top: 0.26, width: 0.43, height: 0.71 };
 
 const meta = await sharp(source).metadata();
 const { width: W, height: H } = meta;
 console.log(`Source: ${W}×${H}`);
 
-const mobileCropW = Math.round(H * MOBILE_ASPECT);
-const mobileLeft = Math.min(Math.max(Math.round(W * MOBILE_FOCUS_X - mobileCropW / 2), 0), W - mobileCropW);
+const mobileRegion = {
+  left: Math.round(MOBILE_CROP.left * W),
+  top: Math.round(MOBILE_CROP.top * H),
+  width: Math.round(MOBILE_CROP.width * W),
+  height: Math.round(MOBILE_CROP.height * H),
+};
 
 const crops = {
   desktop: { region: { left: 0, top: 0, width: W, height: H }, widths: DESKTOP_WIDTHS },
-  mobile: { region: { left: mobileLeft, top: 0, width: mobileCropW, height: H }, widths: MOBILE_WIDTHS },
+  mobile: { region: mobileRegion, widths: MOBILE_WIDTHS },
 };
 
 await mkdir(outDir, { recursive: true });

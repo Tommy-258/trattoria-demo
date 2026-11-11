@@ -40,16 +40,34 @@ function HeroPicture() {
   });
 
   return (
-    <picture>
-      <source media="(max-width: 767px)" type="image/avif" srcSet={srcSet("/images/hero/mobile.avif")} sizes="100vw" />
-      <source media="(max-width: 767px)" type="image/webp" srcSet={srcSet("/images/hero/mobile.webp")} sizes="100vw" />
-      <source type="image/avif" srcSet={srcSet("/images/hero/desktop.avif")} sizes="100vw" />
-      {/* eslint-disable-next-line jsx-a11y/alt-text -- alt is provided via getImageProps */}
-      <img
-        {...img}
-        className="h-full w-full origin-[55%_70%] object-cover object-[55%_60%] motion-safe:animate-ken-burns"
+    // Phones: the close-up crop sits in the top part of the hero (pizza in the upper half) and fades into the
+    // dark background where the text is. Larger screens: the full frame covers the whole hero.
+    <div className="absolute inset-x-0 top-0 h-[min(105vw,62svh)] overflow-hidden md:inset-0 md:h-auto">
+      <picture>
+        <source
+          media="(max-width: 767px)"
+          type="image/avif"
+          srcSet={srcSet("/images/hero/mobile.avif")}
+          sizes="100vw"
+        />
+        <source
+          media="(max-width: 767px)"
+          type="image/webp"
+          srcSet={srcSet("/images/hero/mobile.webp")}
+          sizes="100vw"
+        />
+        <source type="image/avif" srcSet={srcSet("/images/hero/desktop.avif")} sizes="100vw" />
+        {/* eslint-disable-next-line jsx-a11y/alt-text -- alt is provided via getImageProps */}
+        <img
+          {...img}
+          className="h-full w-full origin-[50%_60%] object-cover object-[50%_45%] motion-safe:animate-ken-burns md:origin-[55%_70%] md:object-[55%_60%]"
+        />
+      </picture>
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-b from-transparent to-[#1c120c] md:hidden"
       />
-    </picture>
+    </div>
   );
 }
 
@@ -65,37 +83,42 @@ export function Hero() {
         <HeroPicture />
       </HeroMotion>
 
-      {/* Warm dark overlays keep the text readable over the brightest flames */}
-      <div aria-hidden="true" className="absolute inset-0 bg-[#1c120c]/35 md:bg-transparent" />
+      {/* Desktop: warm dark gradient keeps the text readable over the brightest flames */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(28,18,12,0.92)_0%,rgba(28,18,12,0.55)_45%,rgba(28,18,12,0.1)_75%)] md:bg-[linear-gradient(100deg,rgba(28,18,12,0.88)_0%,rgba(28,18,12,0.7)_38%,rgba(28,18,12,0.25)_68%,rgba(28,18,12,0.05)_100%)]"
+        className="absolute inset-0 hidden md:block md:bg-[linear-gradient(100deg,rgba(28,18,12,0.88)_0%,rgba(28,18,12,0.7)_38%,rgba(28,18,12,0.25)_68%,rgba(28,18,12,0.05)_100%)]"
       />
       {/* Top shade so the transparent navbar stays legible */}
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#1c120c]/60 to-transparent" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#1c120c]/60 to-transparent"
+      />
 
-      <div className="relative mx-auto w-full max-w-6xl px-4 pt-32 pb-16 sm:px-6 md:py-32">
+      {/* On phones the text starts below the pizza and the hero grows if the screen is short */}
+      <div className="relative mx-auto w-full max-w-6xl px-4 pt-[min(92vw,54svh)] pb-10 sm:px-6 md:py-32">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold tracking-[0.2em] text-[#ecd3a4] uppercase">
+          <p className="text-xs font-semibold tracking-[0.2em] text-[#ecd3a4] uppercase sm:text-sm">
             {restaurant.address.neighborhood}, {restaurant.address.city} · Since {restaurant.foundedYear}
           </p>
           <h1
             id="hero-title"
-            className="mt-4 text-5xl leading-[1.05] font-semibold text-cream-50 [text-shadow:0_2px_24px_rgba(0,0,0,0.35)] sm:text-6xl lg:text-7xl"
+            className="mt-3 text-[2.6rem] leading-[1.05] font-semibold text-cream-50 [text-shadow:0_2px_24px_rgba(0,0,0,0.35)] sm:mt-4 sm:text-6xl lg:text-7xl"
           >
             Trattoria <span className="text-[#f4a58f] italic">Bella</span> Napoli
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream-100 sm:text-xl">{restaurant.tagline}</p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:gap-4">
-            <a href="#reserve" className="btn-primary">
+          <p className="mt-3 max-w-xl text-base leading-relaxed text-cream-100 sm:mt-6 sm:text-xl">
+            {restaurant.tagline}
+          </p>
+          <div className="mt-6 flex gap-3 sm:mt-9 sm:gap-4">
+            <a href="#reserve" className="btn-primary flex-1 px-4 sm:flex-none sm:px-6">
               Reserve a table
             </a>
-            <a href="#menu" className="btn-light">
+            <a href="#menu" className="btn-light flex-1 px-4 sm:flex-none sm:px-6">
               View menu
             </a>
           </div>
           {/* Tricolore rule */}
-          <div aria-hidden="true" className="mt-12 flex h-1.5 w-28 overflow-hidden rounded-full">
+          <div aria-hidden="true" className="mt-8 flex h-1.5 w-28 overflow-hidden rounded-full sm:mt-12">
             <span className="flex-1 bg-olive-500" />
             <span className="flex-1 bg-cream-50" />
             <span className="flex-1 bg-tomato-500" />

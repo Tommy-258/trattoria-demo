@@ -92,14 +92,15 @@ through `next/font`, so there are no requests to Google Fonts at runtime and no 
 **Photography where it counts.** The hero is a full-screen photo of a margherita coming out of a wood-fired oven,
 under a warm, dark brown gradient (never pure black) that keeps the cream text above WCAG AA contrast even over the
 brightest flames. The navbar sits transparent over the photo with light text and turns into the solid cream bar once
-you scroll. The Our Story section has two more photos (the oven and a plate of spaghetti). The gingham tablecloth,
+you scroll. On phones the layout changes: a close-up crop puts the pizza in the top half of the screen, fading into
+the dark background, and the name, tagline and buttons sit in the lower part. The Our Story section has two more photos (the oven and a plate of spaghetti). The gingham tablecloth,
 the paper texture and the map preview are still drawn with CSS gradients, so they weigh almost nothing.
 
 **Responsive images in a static export.** Static export turns off Next's on-demand image optimizer, so the hero images
 are prepared ahead of time: `scripts/optimize-hero.mjs` uses sharp to create a landscape crop (640–2560px) and a
-portrait crop for phones (640–1280px), each in AVIF and WebP, plus a tiny blur placeholder. A custom `next/image`
+close-up crop for phones (640–1280px), each in AVIF and WebP, plus a tiny blur placeholder. A custom `next/image`
 loader (`src/lib/image-loader.ts`) maps the widths in `srcset` to those files, and the hero uses `getImageProps` with
-`<picture>` for art direction. A phone downloads a ~36 KB AVIF portrait crop, while a 1440px desktop gets a ~63 KB
+`<picture>` for art direction. A phone downloads a ~29 KB AVIF close-up, while a 1440px desktop gets a ~63 KB
 AVIF. The image loads eagerly with `fetchpriority="high"` and causes no layout shift.
 The two Our Story photos are single WebP files cropped to their display size.
 
@@ -142,7 +143,7 @@ The two Our Story photos are single WebP files cropped to their display size.
 
 The page is fully static HTML with a small amount of client-side JavaScript: the header menu, hero motion, menu tabs,
 map, form, mobile bar and scroll reveal. A local Lighthouse run (mobile, simulated throttling) scored **100** for Accessibility,
-Best Practices and SEO, and about **90–96** for Performance with zero layout shift.
+Best Practices and SEO, and about **87–96** for Performance with zero layout shift.
 
 ## Photo credits
 
