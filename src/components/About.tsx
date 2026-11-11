@@ -14,6 +14,7 @@ export function About() {
                 src="/images/wood-fired-oven.webp"
                 alt="A pizzaiolo sliding a pizza out of a tiled wood-fired oven, embers glowing inside"
                 fill
+                unoptimized
                 sizes="(min-width: 1152px) 330px, (min-width: 768px) 30vw, 60vw"
                 className="object-cover"
               />
@@ -28,6 +29,7 @@ export function About() {
                 src="/images/spaghetti-pomodoro.webp"
                 alt="A plate of spaghetti in fresh tomato sauce topped with chopped parsley"
                 fill
+                unoptimized
                 sizes="(min-width: 1152px) 330px, (min-width: 768px) 30vw, 60vw"
                 className="object-cover"
               />

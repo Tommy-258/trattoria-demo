@@ -21,6 +21,17 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-ken-burns: ken-burns 22s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+
+  /* Slow zoom on load; only a few percent so it reads as "alive", not as an effect */
+  @keyframes ken-burns {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.08);
+    }
+  }
 
   @keyframes fade-up {
     from {
@@ -62,6 +73,11 @@
     border-radius: 4px;
   }
 
+  /* Light focus ring on dark surfaces (hero photo, transparent navbar, footer) */
+  [data-on-dark] :focus-visible {
+    outline-color: var(--color-cream-50);
+  }
+
   input,
   select,
   textarea {
@@ -79,6 +95,10 @@
   }
   .btn-secondary {
     @apply btn border-2 border-olive-600 text-olive-700 hover:bg-olive-600 hover:text-cream-50;
+  }
+  /* Outline button for dark backgrounds (hero photo) */
+  .btn-light {
+    @apply btn border-2 border-cream-50/85 bg-black/15 text-cream-50 backdrop-blur-[2px] hover:border-cream-50 hover:bg-cream-50 hover:text-ink;
   }
 
   .eyebrow {

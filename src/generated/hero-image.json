@@ -1,0 +1,35 @@
+{
+  "responsive": {
+    "/images/hero/desktop.webp": [
+      640,
+      828,
+      1080,
+      1280,
+      1920,
+      2560
+    ],
+    "/images/hero/desktop.avif": [
+      640,
+      828,
+      1080,
+      1280,
+      1920,
+      2560
+    ],
+    "/images/hero/mobile.webp": [
+      640,
+      828,
+      1080,
+      1280
+    ],
+    "/images/hero/mobile.avif": [
+      640,
+      828,
+      1080,
+      1280
+    ]
+  },
+  "blurDataURL": "data:image/webp;base64,UklGRsQAAABXRUJQVlA4ILgAAAAwBQCdASoYABAAPu1iqU2ppaOiMAgBMB2JbACdMoRwHvAD0OIRB+aPCRh6PzyKJ9inQAD+8NhWfdTlV2wo9KC9U+FFtowop0mqPLeNYfFpjdjV6A6rHnMQBMy4lW+/Og5TE7vWIbQtvDaQHzFre9FwjG9/8DX+xFhT1SyWf7VSjDDdBdtaLIDmTo3WSFDL1mGxGJRwJuguzJTzrqU/vMJhC/KJs6aTZdefMEr5aJ7x/sJpjkBdAAAA",
+  "width": 5568,
+  "height": 3712
+}

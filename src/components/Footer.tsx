@@ -7,7 +7,7 @@ const socialLink =
 export function Footer() {
   const { address } = restaurant;
   return (
-    <footer className="bg-ink pt-16 pb-28 text-cream-200 md:pb-12">
+    <footer data-on-dark className="bg-ink pt-16 pb-28 text-cream-200 md:pb-12">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-3">
         <div>
           <p className="font-serif text-2xl font-semibold text-cream-50">
