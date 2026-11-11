@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream-50: #fffcf7;
+  --color-cream-100: #fbf6ee;
+  --color-cream-200: #f4ead9;
+  --color-cream-300: #eadbc2;
+
+  --color-tomato-500: #c23a26;
+  --color-tomato-600: #a92f1d; /* 6.1:1 on cream-100 */
+  --color-tomato-700: #8c2416;
+
+  --color-olive-500: #6b7d3a;
+  --color-olive-600: #55652c; /* 6.0:1 on cream-100 */
+  --color-olive-700: #414d21;
+
+  --color-ink: #2b211c;
+  --color-ink-soft: #5b4d44; /* 7.4:1 on cream-100 */
+
+  --font-serif: var(--font-playfair), ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* keep anchored sections clear of the sticky header */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream-100 text-ink font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif text-balance;
+  }
+
+  ::selection {
+    @apply bg-tomato-600 text-cream-50;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-olive-600);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition duration-200 ease-out motion-safe:hover:-translate-y-0.5;
+}
+
+@layer components {
+  .btn-primary {
+    @apply btn bg-tomato-600 text-cream-50 shadow-[0_8px_24px_-12px_rgba(169,47,29,0.7)] hover:bg-tomato-700;
+  }
+  .btn-secondary {
+    @apply btn border-2 border-olive-600 text-olive-700 hover:bg-olive-600 hover:text-cream-50;
+  }
+
+  .eyebrow {
+    @apply text-sm font-semibold tracking-[0.2em] text-olive-600 uppercase;
+  }
+
+  .section-title {
+    @apply mt-3 text-4xl leading-tight font-semibold text-ink sm:text-5xl;
+  }
+
+  /* Subtle paper grain made only with gradients — no image assets */
+  .bg-paper {
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(194, 58, 38, 0.06), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(107, 125, 58, 0.08), transparent 45%),
+      radial-gradient(circle at 50% 100%, rgba(234, 219, 194, 0.7), transparent 60%);
+  }
+
+  /* Gingham tablecloth pattern, pure CSS */
+  .bg-gingham {
+    background-color: var(--color-cream-50);
+    background-image:
+      linear-gradient(90deg, rgba(169, 47, 29, 0.14) 50%, transparent 50%),
+      linear-gradient(rgba(169, 47, 29, 0.14) 50%, transparent 50%);
+    background-size: 28px 28px;
+  }
+
+  /* Placeholder block for real photography later */
+  .photo-placeholder {
+    @apply relative flex items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-cream-300 text-center text-sm font-medium text-ink-soft;
+    background:
+      repeating-linear-gradient(-45deg, rgba(234, 219, 194, 0.45) 0 12px, transparent 12px 24px),
+      var(--color-cream-50);
+  }
+}
+
+/* Scroll-reveal: content is visible by default; JS opts elements in. */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
