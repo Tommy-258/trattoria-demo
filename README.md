@@ -81,9 +81,12 @@ table: San Marzano tomatoes, olive oil and basil, on linen. Every text/backgroun
 menu-card feel. _Inter_ is used for body text and forms because it stays readable at small sizes. Both are self-hosted
 through `next/font`, so there are no requests to Google Fonts at runtime and no layout shift.
 
-**No stock photos.** The hero pizza, the gingham tablecloth, the paper texture and the map preview are all drawn with
-CSS gradients, so they weigh almost nothing and stay sharp at any size. Places where real photography belongs are
-striped blocks labeled **"Photo placeholder"** in the About section, ready to be swapped for `next/image` images.
+**Few, light images.** The hero pizza, the gingham tablecloth, the paper texture and the map preview are all drawn with
+CSS gradients, so they weigh almost nothing and stay sharp at any size. The only photos are two in the Our Story
+section (a wood-fired oven and a plate of spaghetti). They are free Unsplash photos, saved in `public/images/` as WebP
+cropped to the size they're shown at (about 190 KB and 70 KB), and rendered with `next/image` (lazy loading, `sizes`,
+no layout shift). Because the site is a static export, Next's image optimizer is off (`images.unoptimized`), which is
+why the files are optimized ahead of time.
 
 **Details.**
 
@@ -121,6 +124,16 @@ striped blocks labeled **"Photo placeholder"** in the About section, ready to be
 The page is fully static HTML with a small amount of client-side JavaScript: the header menu, menu tabs, map, form,
 mobile bar and scroll reveal. A local Lighthouse run (mobile, simulated throttling) scored **100** for Accessibility,
 Best Practices and SEO, and **90+** for Performance.
+
+## Photo credits
+
+Both photos are used under the [Unsplash License](https://unsplash.com/license) (free for commercial and
+non-commercial use, no permission needed).
+
+| File                                    | Photo                                                                                                                       | Photographer                                              |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `public/images/wood-fired-oven.webp`    | [A chef cooks pizza in a wood-fired oven](https://unsplash.com/photos/a-chef-cooks-pizza-in-a-wood-fired-oven-7TAG9wlv1uw) | [Brad](https://unsplash.com/@minimdesignco)               |
+| `public/images/spaghetti-pomodoro.webp` | [A plate of spaghetti with tomato sauce and parsley](https://unsplash.com/photos/Htb3Neu9Tmg)                               | [Mandy Bourke](https://unsplash.com/@myshegotripped)      |
 
 ## Disclaimer
 

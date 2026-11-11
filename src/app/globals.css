@@ -105,14 +105,6 @@
       linear-gradient(rgba(169, 47, 29, 0.14) 50%, transparent 50%);
     background-size: 28px 28px;
   }
-
-  /* Placeholder block for real photography later */
-  .photo-placeholder {
-    @apply relative flex items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-cream-300 text-center text-sm font-medium text-ink-soft;
-    background:
-      repeating-linear-gradient(-45deg, rgba(234, 219, 194, 0.45) 0 12px, transparent 12px 24px),
-      var(--color-cream-50);
-  }
 }
 
 /* Scroll-reveal: content is visible by default; JS opts elements in. */

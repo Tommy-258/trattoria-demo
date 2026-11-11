@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { restaurant } from "@/config/restaurant";
 
 export function About() {
@@ -8,24 +9,28 @@ export function About() {
       <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 md:grid-cols-2 md:items-center md:gap-16">
         <div data-reveal className="order-2 md:order-1">
           <div className="grid grid-cols-5 grid-rows-5 gap-4" style={{ aspectRatio: "1 / 1" }}>
-            <div className="photo-placeholder col-span-3 row-span-3">
-              <span className="px-4">
-                Photo placeholder
-                <br />
-                <span className="text-xs font-normal">The family in the kitchen</span>
-              </span>
+            <div className="relative col-span-3 row-span-3 overflow-hidden rounded-3xl bg-cream-200">
+              <Image
+                src="/images/wood-fired-oven.webp"
+                alt="A pizzaiolo sliding a pizza out of a tiled wood-fired oven, embers glowing inside"
+                fill
+                sizes="(min-width: 1152px) 330px, (min-width: 768px) 30vw, 60vw"
+                className="object-cover"
+              />
             </div>
             <div className="col-span-2 row-span-2 rounded-3xl bg-gingham" aria-hidden="true" />
             <div className="col-span-2 row-span-3 flex flex-col justify-end rounded-3xl bg-olive-600 p-5 text-cream-50">
               <p className="font-serif text-5xl font-semibold">{years}+</p>
               <p className="mt-1 text-sm leading-snug">years of Sunday ragù on Court Street</p>
             </div>
-            <div className="photo-placeholder col-span-3 row-span-2">
-              <span className="px-4">
-                Photo placeholder
-                <br />
-                <span className="text-xs font-normal">Our wood-fired oven</span>
-              </span>
+            <div className="relative col-span-3 row-span-2 overflow-hidden rounded-3xl bg-cream-200">
+              <Image
+                src="/images/spaghetti-pomodoro.webp"
+                alt="A plate of spaghetti in fresh tomato sauce topped with chopped parsley"
+                fill
+                sizes="(min-width: 1152px) 330px, (min-width: 768px) 30vw, 60vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
